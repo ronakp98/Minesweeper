@@ -1,15 +1,27 @@
-const blankLine = '  |   |  ';
-const guessLine = '1 |   |  ';
-const bombLine = '  | B |  ';
+/*
+  project:  minesweeper.js
+  date:     10/11/18
+  author:   Ronak Patel
+*/
 
-console.log('This is what an empty board should look like:')
+const printBoard = board =>
+{
+  console.log("Current Board:");
 
-console.log(blankLine);
-console.log(blankLine);
-console.log(blankLine);
+  console.log(board[0].join(' | '));
+  console.log(board[1].join(' | '));
+  console.log(board[2].join(' | '));
+}
 
-console.log('This is what a board with a guess and a bomb on it would look like');
+let board = [
+  [' ', ' ', ' '],
+  [' ', ' ', ' '],
+  [' ', ' ', ' ']
+];
 
-console.log(guessLine);
-console.log(bombLine);
-console.log(blankLine);
+printBoard(board);
+
+board[0][1] = '1';
+board[2][2] = 'B';
+
+printBoard(board);
