@@ -1,27 +1,65 @@
 /*
   project:  minesweeper.js
-  date:     10/11/18
+  date:     10/26/18
   author:   Ronak Patel
 */
 
-const printBoard = board =>
-{
-  console.log("Current Board:");
+const generatePlayerBoard = (numberOfRows, numberOfColumns) => {
 
-  console.log(board[0].join(' | '));
-  console.log(board[1].join(' | '));
-  console.log(board[2].join(' | '));
+  var board = [];
+
+  for(let i = 0; i < numberOfRows; i++)
+  {
+    var row = [];
+    for(let j = 0; j < numberOfColumns; j++)
+    {
+      row.push(' ');
+    }
+    board.push(row);
+  }
+  return board;
+
 }
 
-let board = [
-  [' ', ' ', ' '],
-  [' ', ' ', ' '],
-  [' ', ' ', ' ']
-];
 
-printBoard(board);
+const generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) => {
 
-board[0][1] = '1';
-board[2][2] = 'B';
+  var board = [];
 
-printBoard(board);
+  for(let i = 0; i < numberOfRows; i++)
+  {
+    var row = [];
+    for(let j = 0; j < numberOfColumns; j++)
+    {
+      row.push(null);
+    }
+    board.push(row);
+  }
+
+  let numberOfBombsPlaced = 0;
+
+  while(numberOfBombsPlaced < numberOfBombs)
+  {
+    let randomRowIndex = Math.floor(Math.random() * numberOfRows);
+    let randomColumnIndex = Math.floor(Math.random() * numberOfColumns);
+
+    board[randomRowIndex][randomColumnIndex] = 'B';
+
+    numberOfBombsPlaced++;
+    //Can add bombs in the same index as a bomb
+  }
+  return board;
+}
+
+const printBoard = (board) => {
+  console.log(board.map(row => row.join(' | ')).join('\n'));
+}
+
+let playerBoard = generatePlayerBoard(3,4);
+let bombBoard = generateBombBoard(3,4,5);
+
+console.log('Player Board: ');
+printBoard(playerBoard);
+
+console.log('Bomb Board: ');
+printBoard(bombBoard);
